@@ -87,7 +87,7 @@ train_scores = []
 test_scores = []
 train_loss = LambdaCallback(on_epoch_end=lambda batch, logs: train_scores.append(logs['loss']))
 earlystopper = EarlyStopping(monitor='loss', patience=epochs/10)
-model.compile(optimizer=Adam(learning_rate=0.025, beta_1=0.9, beta_2=0.999, epsilon=1e-8), loss='mae', metrics=[RootMeanSquaredError()])
+model.compile(optimizer=Adam(learning_rate=0.01, beta_1=0.9, beta_2=0.999, epsilon=1e-8), loss='mae', metrics=[RootMeanSquaredError()])
 test_loss = LambdaCallback(on_epoch_end=lambda batch, logs: test_scores.append(model.evaluate(test_x, test_y)[0]))
 
 model.fit(train_x, train_y, batch_size=50, epochs=epochs, callbacks=[train_loss, test_loss, earlystopper])
